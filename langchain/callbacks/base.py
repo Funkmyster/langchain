@@ -101,27 +101,24 @@ class CallbackManager(BaseCallbackManager):
     ) -> None:
         """Run when LLM starts running."""
         for handler in self.handlers:
-            if not handler.ignore_llm:
-                if verbose or handler.always_verbose:
-                    handler.on_llm_start(serialized, prompts, **kwargs)
+            if not handler.ignore_llm and (verbose or handler.always_verbose):
+                handler.on_llm_start(serialized, prompts, **kwargs)
 
     def on_llm_end(
         self, response: LLMResult, verbose: bool = False, **kwargs: Any
     ) -> None:
         """Run when LLM ends running."""
         for handler in self.handlers:
-            if not handler.ignore_llm:
-                if verbose or handler.always_verbose:
-                    handler.on_llm_end(response)
+            if not handler.ignore_llm and (verbose or handler.always_verbose):
+                handler.on_llm_end(response)
 
     def on_llm_error(
         self, error: Exception, verbose: bool = False, **kwargs: Any
     ) -> None:
         """Run when LLM errors."""
         for handler in self.handlers:
-            if not handler.ignore_llm:
-                if verbose or handler.always_verbose:
-                    handler.on_llm_error(error)
+            if not handler.ignore_llm and (verbose or handler.always_verbose):
+                handler.on_llm_error(error)
 
     def on_chain_start(
         self,
@@ -132,27 +129,24 @@ class CallbackManager(BaseCallbackManager):
     ) -> None:
         """Run when chain starts running."""
         for handler in self.handlers:
-            if not handler.ignore_chain:
-                if verbose or handler.always_verbose:
-                    handler.on_chain_start(serialized, inputs, **kwargs)
+            if not handler.ignore_chain and (verbose or handler.always_verbose):
+                handler.on_chain_start(serialized, inputs, **kwargs)
 
     def on_chain_end(
         self, outputs: Dict[str, Any], verbose: bool = False, **kwargs: Any
     ) -> None:
         """Run when chain ends running."""
         for handler in self.handlers:
-            if not handler.ignore_chain:
-                if verbose or handler.always_verbose:
-                    handler.on_chain_end(outputs)
+            if not handler.ignore_chain and (verbose or handler.always_verbose):
+                handler.on_chain_end(outputs)
 
     def on_chain_error(
         self, error: Exception, verbose: bool = False, **kwargs: Any
     ) -> None:
         """Run when chain errors."""
         for handler in self.handlers:
-            if not handler.ignore_chain:
-                if verbose or handler.always_verbose:
-                    handler.on_chain_error(error)
+            if not handler.ignore_chain and (verbose or handler.always_verbose):
+                handler.on_chain_error(error)
 
     def on_tool_start(
         self,
@@ -163,25 +157,22 @@ class CallbackManager(BaseCallbackManager):
     ) -> None:
         """Run when tool starts running."""
         for handler in self.handlers:
-            if not handler.ignore_agent:
-                if verbose or handler.always_verbose:
-                    handler.on_tool_start(serialized, action, **kwargs)
+            if not handler.ignore_agent and (verbose or handler.always_verbose):
+                handler.on_tool_start(serialized, action, **kwargs)
 
     def on_tool_end(self, output: str, verbose: bool = False, **kwargs: Any) -> None:
         """Run when tool ends running."""
         for handler in self.handlers:
-            if not handler.ignore_agent:
-                if verbose or handler.always_verbose:
-                    handler.on_tool_end(output, **kwargs)
+            if not handler.ignore_agent and (verbose or handler.always_verbose):
+                handler.on_tool_end(output, **kwargs)
 
     def on_tool_error(
         self, error: Exception, verbose: bool = False, **kwargs: Any
     ) -> None:
         """Run when tool errors."""
         for handler in self.handlers:
-            if not handler.ignore_agent:
-                if verbose or handler.always_verbose:
-                    handler.on_tool_error(error)
+            if not handler.ignore_agent and (verbose or handler.always_verbose):
+                handler.on_tool_error(error)
 
     def on_text(self, text: str, verbose: bool = False, **kwargs: Any) -> None:
         """Run on additional input from chains and agents."""
@@ -194,9 +185,8 @@ class CallbackManager(BaseCallbackManager):
     ) -> None:
         """Run on agent end."""
         for handler in self.handlers:
-            if not handler.ignore_agent:
-                if verbose or handler.always_verbose:
-                    handler.on_agent_finish(finish, **kwargs)
+            if not handler.ignore_agent and (verbose or handler.always_verbose):
+                handler.on_agent_finish(finish, **kwargs)
 
     def add_handler(self, handler: BaseCallbackHandler) -> None:
         """Add a handler to the callback manager."""

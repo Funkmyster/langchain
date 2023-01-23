@@ -55,7 +55,7 @@ class PALChain(Chain, BaseModel):
             code, color="green", end="\n", verbose=self.verbose
         )
         repl = PythonREPL()
-        res = repl.run(code + f"\n{self.get_answer_expr}")
+        res = repl.run(f"{code}\n{self.get_answer_expr}")
         return {self.output_key: res.strip()}
 
     @classmethod
